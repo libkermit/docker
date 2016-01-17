@@ -1,11 +1,11 @@
 # Libkermit [![Build Status](https://travis-ci.org/vdemeester/libkermit.svg?branch=add-readme)](https://travis-ci.org/vdemeester/libkermit)
 
-> When green is all there is to be
-> It could make you wonder why
-> But why wonder why wonder
-> I am green, and it'll do fine
-> It's beautiful,
-> and I think it's what I want to be.
+> When green is all there is to be<br/>
+> It could make you wonder why<br/>
+> But why wonder why wonder<br/>
+> I am green, and it'll do fine<br/>
+> It's beautiful,<br/>
+> and I think it's what I want to be.<br/>
 > -- Kermit the Frog
 
 When [Docker](https://github.com/docker/docker) meets with
