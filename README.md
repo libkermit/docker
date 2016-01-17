@@ -35,7 +35,7 @@ The goals are :
 
 This package holds functions and structs to ease docker uses.
 
-```
+```go
 package yours
 
 import (
