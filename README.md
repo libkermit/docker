@@ -30,7 +30,42 @@ The goals are :
 
 **Note: This is experimental and not even implemented yet. You are on your own right now**
 
-## In action
+
+## Package `docker`
+
+This package holds functions and structs to ease docker uses.
+
+```
+package yours
+
+import (
+    "testing"
+
+    "github.com/vdemeester/libkermit/docker"
+)
+
+func TestItMyFriend(t *testing.T) {
+    container, err := docker.Start("vdemeester/myawesomeimage")
+    if err != nil {
+        t.Fatal(err)
+    }
+
+    // Do your stuff
+
+    err = docker.Stop(container.ID)
+    if err != nil {
+        t.Fatal(err)
+    }
+}
+```
+
+
+## Other packages to come
+
+- `compose` : functions and structs to ease compose uses.
+- `suite` : functions and structs to setup tests suites.
+
+## In action (at some point)
 
 This might look like that.
 
@@ -77,8 +112,3 @@ func TestExampleTestSuite(t *testing.T) {
 }
 ```
 
-## Packages
-
-- `docker` : functions and structs to ease docker uses.
-- `compose` : functions and structs to ease compose uses.
-- `suite` : functions and structs to setup tests suites.
