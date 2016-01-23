@@ -5,7 +5,7 @@ cd "$(dirname "$BASH_SOURCE")/.."
 rm -rf vendor/
 source 'hack/.vendor-helpers.sh'
 
-clone git github.com/docker/docker v1.10.0-rc1
+# clone git github.com/docker/docker v1.10.0-rc1
 clone git github.com/docker/go-units 651fc226e7441360384da338d0fd37f2440ffbe3
 # FIXME use tags >v0.2.3 soon
 clone git github.com/docker/engine-api 31b698aad77eafbef7e6a344a001038c46a68425
