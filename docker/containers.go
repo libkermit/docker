@@ -30,6 +30,3 @@ var (
 
 //Remove(ContainerID string) error
 //WaitInspect(containerID, expression, value string) error
-//IsRunning(containerID string) (bool, error)
-//IsStopped(containerID string) (bool, error)
-//IsPaused(containerID string) (bool, error)
