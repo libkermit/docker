@@ -17,6 +17,7 @@ type fakeClient struct {
 	containerID   string
 	containerName string
 	running       bool
+	state         string
 }
 
 func (c *fakeClient) ClientVersion() string {
@@ -49,6 +50,7 @@ func (c *fakeClient) ContainerInspect(containerID string) (types.ContainerJSON, 
 				Name:  c.containerName,
 				Image: c.image,
 				State: &types.ContainerState{
+					Status:  c.state,
 					Running: c.running,
 				},
 			},
