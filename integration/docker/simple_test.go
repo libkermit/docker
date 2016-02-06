@@ -17,6 +17,9 @@ func TestCreateSimple(t *testing.T) {
 	if container.ID == "" {
 		t.Fatalf("expected a containerId, got nothing")
 	}
+	if container.Name != "/kermit_busybox" {
+		t.Fatalf("expected kermit_busyboy as name, got %s", container.Name)
+	}
 }
 
 func TestStartAndStop(t *testing.T) {
@@ -29,6 +32,9 @@ func TestStartAndStop(t *testing.T) {
 	}
 	if container.ID == "" {
 		t.Fatalf("expected a containerId, got nothing")
+	}
+	if container.Name != "/kermit_busybox" {
+		t.Fatalf("expected kermit_busyboy as name, got %s", container.Name)
 	}
 
 	err = docker.Stop(container.ID)
