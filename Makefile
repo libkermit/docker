@@ -1,5 +1,9 @@
 .PHONY: all
 
+LIBCOMPOSE_ENVS := \
+	-e DOCKER_TEST_HOST \
+	-e TESTFLAGS
+
 BIND_DIR := "dist"
 LIBKERMIT_MOUNT := -v "$(CURDIR)/$(BIND_DIR):/go/src/github.com/vdemeester/libkermit/$(BIND_DIR)"
 
