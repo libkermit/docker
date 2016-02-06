@@ -36,10 +36,20 @@ func TestStartAndStop(t *testing.T) {
 	if container.Name != "/kermit_busybox" {
 		t.Fatalf("expected kermit_busyboy as name, got %s", container.Name)
 	}
+	if !container.State.Running {
+		t.Fatalf("expected container to be running, but was in state %v", container.State)
+	}
 
 	err = docker.Stop(container.ID)
 	if err != nil {
 		t.Fatal(err)
 	}
 
+	container, err = docker.Inspect(container.ID)
+	if err != nil {
+		t.Fatalf("expected no error, got %v", err)
+	}
+	if container.State.Running {
+		t.Fatalf("expected container to be running, but was in state %v", container.State)
+	}
 }
