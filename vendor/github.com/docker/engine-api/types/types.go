@@ -199,6 +199,7 @@ type Info struct {
 	Images             int
 	Driver             string
 	DriverStatus       [][2]string
+	SystemStatus       [][2]string
 	Plugins            PluginsInfo
 	MemoryLimit        bool
 	SwapLimit          bool
@@ -223,8 +224,6 @@ type Info struct {
 	Architecture       string
 	IndexServerAddress string
 	RegistryConfig     *registry.ServiceConfig
-	InitSha1           string
-	InitPath           string
 	NCPU               int
 	MemTotal           int64
 	DockerRootDir      string
@@ -388,6 +387,7 @@ type NetworkResource struct {
 	ID         string `json:"Id"`
 	Scope      string
 	Driver     string
+	EnableIPv6 bool
 	IPAM       network.IPAM
 	Internal   bool
 	Containers map[string]EndpointResource
@@ -408,6 +408,7 @@ type NetworkCreate struct {
 	Name           string
 	CheckDuplicate bool
 	Driver         string
+	EnableIPv6     bool
 	IPAM           network.IPAM
 	Internal       bool
 	Options        map[string]string

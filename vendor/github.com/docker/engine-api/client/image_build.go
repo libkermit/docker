@@ -9,6 +9,8 @@ import (
 	"strconv"
 	"strings"
 
+	"golang.org/x/net/context"
+
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/container"
 )
@@ -18,7 +20,7 @@ var headerRegexp = regexp.MustCompile(`\ADocker/.+\s\((.+)\)\z`)
 // ImageBuild sends request to the daemon to build images.
 // The Body in the response implement an io.ReadCloser and it's up to the caller to
 // close it.
-func (cli *Client) ImageBuild(options types.ImageBuildOptions) (types.ImageBuildResponse, error) {
+func (cli *Client) ImageBuild(ctx context.Context, options types.ImageBuildOptions) (types.ImageBuildResponse, error) {
 	query, err := imageBuildOptionsToQuery(options)
 	if err != nil {
 		return types.ImageBuildResponse{}, err
@@ -32,7 +34,7 @@ func (cli *Client) ImageBuild(options types.ImageBuildOptions) (types.ImageBuild
 	headers.Add("X-Registry-Config", base64.URLEncoding.EncodeToString(buf))
 	headers.Set("Content-Type", "application/tar")
 
-	serverResp, err := cli.postRaw("/build", query, options.Context, headers)
+	serverResp, err := cli.postRaw(ctx, "/build", query, options.Context, headers)
 	if err != nil {
 		return types.ImageBuildResponse{}, err
 	}
@@ -68,11 +70,14 @@ func imageBuildOptionsToQuery(options types.ImageBuildOptions) (url.Values, erro
 		query.Set("forcerm", "1")
 	}
 
+	if options.PullParent {
+		query.Set("pull", "1")
+	}
+
 	if !container.IsolationLevel.IsDefault(options.IsolationLevel) {
 		query.Set("isolation", string(options.IsolationLevel))
 	}
 
-	query.Set("pull", options.PullParent.String())
 	query.Set("cpusetcpus", options.CPUSetCPUs)
 	query.Set("cpusetmems", options.CPUSetMems)
 	query.Set("cpushares", strconv.FormatInt(options.CPUShares, 10))
