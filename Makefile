@@ -16,7 +16,10 @@ all: build
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh
 
 test: build
-	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-unit
+	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-unit test-integration
+
+test-integration: build
+	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-integration
 
 test-unit: build
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-unit

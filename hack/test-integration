@@ -1,0 +1,14 @@
+#!/bin/bash
+set -e
+
+bundle_test_integration() {
+	TESTFLAGS="$TESTFLAGS"
+	go_test_dir ./integration/docker
+        # hum wonder how to handle that
+}
+
+# subshell so that we can export PATH without breaking other things
+(
+	export GO15VENDOREXPERIMENT=1
+	bundle_test_integration
+) 2>&1

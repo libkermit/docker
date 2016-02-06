@@ -31,6 +31,11 @@ func CreateWithConfig(image string, config ContainerConfig) (types.ContainerJSON
 }
 
 func create(client client.APIClient, image string, containerConfig ContainerConfig) (types.ContainerJSON, error) {
+	err := ensureImageExists(client, image)
+	if err != nil {
+		return types.ContainerJSON{}, err
+	}
+
 	config := &container.Config{
 		Image:  image,
 		Labels: KermitLabels,
