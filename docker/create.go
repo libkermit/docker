@@ -3,9 +3,11 @@ package docker
 import (
 	"fmt"
 
+	"github.com/docker/docker/pkg/namesgenerator"
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/container"
+	"github.com/docker/engine-api/types/strslice"
 )
 
 // Create lets you create a container with the specified image, and default
@@ -36,12 +38,25 @@ func create(client client.APIClient, image string, containerConfig ContainerConf
 		return types.ContainerJSON{}, err
 	}
 
+	labels := mergeLabels(KermitLabels, containerConfig.Labels)
 	config := &container.Config{
 		Image:  image,
-		Labels: KermitLabels,
+		Labels: labels,
 	}
 
-	containerName := fmt.Sprintf("kermit_%s", image)
+	if len(containerConfig.Entrypoint) > 0 {
+		config.Entrypoint = strslice.New(containerConfig.Entrypoint...)
+	}
+	if len(containerConfig.Cmd) > 0 {
+		config.Cmd = strslice.New(containerConfig.Cmd...)
+	}
+
+	var containerName string
+	if containerConfig.Name != "" {
+		containerName = containerConfig.Name
+	} else {
+		containerName = fmt.Sprintf("kermit_%s", namesgenerator.GetRandomName(10))
+	}
 
 	response, err := client.ContainerCreate(config, &container.HostConfig{}, nil, containerName)
 	if err != nil {
@@ -49,4 +64,18 @@ func create(client client.APIClient, image string, containerConfig ContainerConf
 	}
 
 	return inspect(client, response.ID)
+}
+
+func mergeLabels(defaultLabels, additionnalLabels map[string]string) map[string]string {
+	labels := make(map[string]string, len(defaultLabels))
+	if len(additionnalLabels) > 0 {
+		for key, value := range additionnalLabels {
+			labels[key] = value
+		}
+	}
+	// default labels overrides additionnals
+	for key, value := range defaultLabels {
+		labels[key] = value
+	}
+	return labels
 }

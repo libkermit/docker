@@ -27,6 +27,3 @@ var (
 	// DefaultStopTimeout is the default timeout for the stop command
 	DefaultStopTimeout = 10
 )
-
-//Remove(ContainerID string) error
-//WaitInspect(containerID, expression, value string) error
