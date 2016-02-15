@@ -1,6 +1,7 @@
 package dockerit
 
 import (
+	"strings"
 	"testing"
 
 	"github.com/vdemeester/libkermit/docker"
@@ -17,8 +18,8 @@ func TestCreateSimple(t *testing.T) {
 	if container.ID == "" {
 		t.Fatalf("expected a containerId, got nothing")
 	}
-	if container.Name != "/kermit_busybox" {
-		t.Fatalf("expected kermit_busyboy as name, got %s", container.Name)
+	if strings.HasPrefix(container.Name, "kermit_") {
+		t.Fatalf("expected name to start with 'kermit_', got %s", container.Name)
 	}
 }
 
@@ -33,8 +34,8 @@ func TestStartAndStop(t *testing.T) {
 	if container.ID == "" {
 		t.Fatalf("expected a containerId, got nothing")
 	}
-	if container.Name != "/kermit_busybox" {
-		t.Fatalf("expected kermit_busyboy as name, got %s", container.Name)
+	if strings.HasPrefix(container.Name, "kermit_") {
+		t.Fatalf("expected name to start with 'kermit_', got %s", container.Name)
 	}
 	if !container.State.Running {
 		t.Fatalf("expected container to be running, but was in state %v", container.State)

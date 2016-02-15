@@ -3,6 +3,7 @@ package docker
 import (
 	"fmt"
 
+	"github.com/docker/docker/pkg/namesgenerator"
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/container"
@@ -50,7 +51,12 @@ func create(client client.APIClient, image string, containerConfig ContainerConf
 		config.Cmd = strslice.New(containerConfig.Cmd...)
 	}
 
-	containerName := fmt.Sprintf("kermit_%s", image)
+	var containerName string
+	if containerConfig.Name != "" {
+		containerName = containerConfig.Name
+	} else {
+		containerName = fmt.Sprintf("kermit_%s", namesgenerator.GetRandomName(10))
+	}
 
 	response, err := client.ContainerCreate(config, &container.HostConfig{}, nil, containerName)
 	if err != nil {
