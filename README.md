@@ -60,14 +60,10 @@ func TestItMyFriend(t *testing.T) {
 ```
 
 
-## Other packages to come
 
-- `compose` : functions and structs to ease compose uses.
-- `suite` : functions and structs to setup tests suites.
+## Package `compose`
 
-## In action (at some point)
-
-This might look like that.
+This package holds functions and structs to ease docker uses.
 
 ```go
 package yours
@@ -75,40 +71,31 @@ package yours
 import (
     "testing"
 
-    "github.com/vdemeester/libkermit/suite"
-    "github.com/vdemeester/libkermit/docker"
     "github.com/vdemeester/libkermit/compose"
 )
 
-type ExampleTestSuite struct {
-    suite.Suite
-    IAmCool int
-}
-
-// Start a compose project before running the suites
-func (suite *ExampleTestSuite) SetupSuite() {
-    compose.startProject("fixtures/my-compose-project")
-}
-
-// And set up stuff before each tests
-func (suite *ExampleTestSuite) SetupTest() {
-    suite.IAmCool = 0
-}
-
-// All methods that begin with "Test" are run as tests within a
-// suite.
-func (suite *ExampleTestSuite) TestExample() {
-    if suite.IAmCool != 0 {
-        suite.T().Fatalf("I should not be cool but I was %d", suite.IAmCool)
+func TestItMyFriend(t *testing.T) {
+    project, err := compose.CreateProject("simple", "./assets/simple.yml")
+    if err != nil {
+        t.Fatal(err)
     }
-    compose.IsRunning("my-service")
-    docker.IsRunning("some-container")
-}
+    err = project.Start()
+	if err != nil {
+		t.Fatal(err)
+	}
 
-// In order for 'go test' to run this suite, we need to create
-// a normal test function and pass our suite to suite.Run
-func TestExampleTestSuite(t *testing.T) {
-    suite.Run(t, new(ExampleTestSuite))
+    // Do your stuff
+
+    err = project.Stop()
+	if err != nil {
+		t.Fatal(err)
+	}
 }
 ```
+
+
+## Other packages to come
+
+- `suite` : functions and structs to setup tests suites.
+
 
