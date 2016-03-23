@@ -1,6 +1,8 @@
 package docker
 
 import (
+	"golang.org/x/net/context"
+
 	"github.com/docker/engine-api/client"
 )
 
@@ -19,7 +21,7 @@ func StopWithTimeout(containerID string, timeout int) error {
 }
 
 func stopWithTimeout(client client.APIClient, containerID string, timeout int) error {
-	if err := client.ContainerStop(containerID, timeout); err != nil {
+	if err := client.ContainerStop(context.Background(), containerID, timeout); err != nil {
 		return err
 	}
 

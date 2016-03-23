@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"io/ioutil"
 
+	"golang.org/x/net/context"
+
 	"github.com/docker/docker/reference"
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
-	"golang.org/x/net/context"
 )
 
 func ensureImageExists(cli client.APIClient, image string) error {
@@ -27,7 +28,7 @@ func ensureImageExists(cli client.APIClient, image string) error {
 	}
 
 	// Check if image is already there
-	_, _, err = cli.ImageInspectWithRaw(image, false)
+	_, _, err = cli.ImageInspectWithRaw(context.Background(), image, false)
 	if err != nil && !client.IsErrImageNotFound(err) {
 		return err
 	}

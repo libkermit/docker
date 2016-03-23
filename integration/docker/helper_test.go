@@ -3,6 +3,8 @@ package dockerit
 import (
 	"testing"
 
+	"golang.org/x/net/context"
+
 	dockerclient "github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	// "github.com/docker/engine-api/types/container"
@@ -25,7 +27,7 @@ func cleanContainers(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	containers, err := client.ContainerList(types.ContainerListOptions{
+	containers, err := client.ContainerList(context.Background(), types.ContainerListOptions{
 		All:    true,
 		Filter: filterArgs,
 	})
@@ -35,7 +37,7 @@ func cleanContainers(t *testing.T) {
 
 	for _, container := range containers {
 		t.Logf("cleaning container %s…", container.ID)
-		if err := client.ContainerRemove(types.ContainerRemoveOptions{
+		if err := client.ContainerRemove(context.Background(), types.ContainerRemoveOptions{
 			ContainerID: container.ID,
 			Force:       true,
 		}); err != nil {
