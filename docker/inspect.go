@@ -1,6 +1,8 @@
 package docker
 
 import (
+	"golang.org/x/net/context"
+
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 )
@@ -15,7 +17,7 @@ func Inspect(containerID string) (types.ContainerJSON, error) {
 }
 
 func inspect(client client.APIClient, containerID string) (types.ContainerJSON, error) {
-	container, err := client.ContainerInspect(containerID)
+	container, err := client.ContainerInspect(context.Background(), containerID)
 	if err != nil {
 		return types.ContainerJSON{}, err
 	}

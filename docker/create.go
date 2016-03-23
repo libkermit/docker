@@ -3,6 +3,8 @@ package docker
 import (
 	"fmt"
 
+	"golang.org/x/net/context"
+
 	"github.com/docker/docker/pkg/namesgenerator"
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
@@ -45,10 +47,10 @@ func create(client client.APIClient, image string, containerConfig ContainerConf
 	}
 
 	if len(containerConfig.Entrypoint) > 0 {
-		config.Entrypoint = strslice.New(containerConfig.Entrypoint...)
+		config.Entrypoint = strslice.StrSlice(containerConfig.Entrypoint)
 	}
 	if len(containerConfig.Cmd) > 0 {
-		config.Cmd = strslice.New(containerConfig.Cmd...)
+		config.Cmd = strslice.StrSlice(containerConfig.Cmd)
 	}
 
 	var containerName string
@@ -58,7 +60,7 @@ func create(client client.APIClient, image string, containerConfig ContainerConf
 		containerName = fmt.Sprintf("kermit_%s", namesgenerator.GetRandomName(10))
 	}
 
-	response, err := client.ContainerCreate(config, &container.HostConfig{}, nil, containerName)
+	response, err := client.ContainerCreate(context.Background(), config, &container.HostConfig{}, nil, containerName)
 	if err != nil {
 		return types.ContainerJSON{}, err
 	}

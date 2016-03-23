@@ -1,6 +1,8 @@
 package docker
 
 import (
+	"golang.org/x/net/context"
+
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 )
@@ -33,7 +35,7 @@ func start(client client.APIClient, image string, containerConfig ContainerConfi
 		return types.ContainerJSON{}, err
 	}
 
-	if err := client.ContainerStart(container.ID); err != nil {
+	if err := client.ContainerStart(context.Background(), container.ID); err != nil {
 		return container, err
 	}
 

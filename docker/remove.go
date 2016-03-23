@@ -1,6 +1,8 @@
 package docker
 
 import (
+	"golang.org/x/net/context"
+
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 )
@@ -15,7 +17,7 @@ func Remove(containerID string) error {
 }
 
 func remove(cli client.APIClient, containerID string) error {
-	if err := cli.ContainerRemove(types.ContainerRemoveOptions{
+	if err := cli.ContainerRemove(context.Background(), types.ContainerRemoveOptions{
 		ContainerID: containerID,
 		Force:       true,
 	}); err != nil {

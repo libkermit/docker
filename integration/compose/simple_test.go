@@ -3,6 +3,8 @@ package composeit
 import (
 	"testing"
 
+	"golang.org/x/net/context"
+
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/filters"
@@ -46,7 +48,7 @@ func findContainersForProject(name string) ([]types.Container, error) {
 		return []types.Container{}, err
 	}
 
-	return client.ContainerList(types.ContainerListOptions{
+	return client.ContainerList(context.Background(), types.ContainerListOptions{
 		All:    true,
 		Filter: filterArgs,
 	})
