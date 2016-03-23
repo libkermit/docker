@@ -41,7 +41,7 @@ func isVolume(s string) bool {
 
 // ConvertToAPI converts a service configuration to a docker API container configuration.
 func ConvertToAPI(s *Service) (*ConfigWrapper, error) {
-	config, hostConfig, err := Convert(s.serviceConfig, s.context)
+	config, hostConfig, err := Convert(s.serviceConfig, s.context.Context)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +53,7 @@ func ConvertToAPI(s *Service) (*ConfigWrapper, error) {
 	return &result, nil
 }
 
-func volumes(c *project.ServiceConfig, ctx *Context) map[string]struct{} {
+func volumes(c *project.ServiceConfig, ctx project.Context) map[string]struct{} {
 	volumes := make(map[string]struct{}, len(c.Volumes))
 	for k, v := range c.Volumes {
 		vol := ctx.ResourceLookup.ResolvePath(v, ctx.ComposeFiles[0])
@@ -106,7 +106,7 @@ func ports(c *project.ServiceConfig) (map[nat.Port]struct{}, nat.PortMap, error)
 }
 
 // Convert converts a service configuration to an docker API structures (Config and HostConfig)
-func Convert(c *project.ServiceConfig, ctx *Context) (*container.Config, *container.HostConfig, error) {
+func Convert(c *project.ServiceConfig, ctx project.Context) (*container.Config, *container.HostConfig, error) {
 	restartPolicy, err := restartPolicy(c)
 	if err != nil {
 		return nil, nil, err
@@ -123,12 +123,12 @@ func Convert(c *project.ServiceConfig, ctx *Context) (*container.Config, *contai
 	}
 
 	config := &container.Config{
-		Entrypoint:   strslice.New(utils.CopySlice(c.Entrypoint.Slice())...),
+		Entrypoint:   strslice.StrSlice(utils.CopySlice(c.Entrypoint.Slice())),
 		Hostname:     c.Hostname,
 		Domainname:   c.DomainName,
 		User:         c.User,
 		Env:          utils.CopySlice(c.Environment.Slice()),
-		Cmd:          strslice.New(utils.CopySlice(c.Command.Slice())...),
+		Cmd:          strslice.StrSlice(utils.CopySlice(c.Command.Slice())),
 		Image:        c.Image,
 		Labels:       utils.CopyMap(c.Labels.MapParts()),
 		ExposedPorts: exposedPorts,
@@ -163,8 +163,8 @@ func Convert(c *project.ServiceConfig, ctx *Context) (*container.Config, *contai
 
 	hostConfig := &container.HostConfig{
 		VolumesFrom: utils.CopySlice(c.VolumesFrom),
-		CapAdd:      strslice.New(utils.CopySlice(c.CapAdd)...),
-		CapDrop:     strslice.New(utils.CopySlice(c.CapDrop)...),
+		CapAdd:      strslice.StrSlice(utils.CopySlice(c.CapAdd)),
+		CapDrop:     strslice.StrSlice(utils.CopySlice(c.CapDrop)),
 		ExtraHosts:  utils.CopySlice(c.ExtraHosts),
 		Privileged:  c.Privileged,
 		Binds:       Filter(c.Volumes, isBind),
