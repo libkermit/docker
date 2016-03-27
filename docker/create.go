@@ -20,7 +20,7 @@ func (p *Project) Create(image string) (types.ContainerJSON, error) {
 // CreateWithConfig lets you create a container with the specified image, and
 // some custom simple configuration.
 func (p *Project) CreateWithConfig(image string, containerConfig ContainerConfig) (types.ContainerJSON, error) {
-	err := p.ensureImageExists(image)
+	err := p.ensureImageExists(image, false)
 	if err != nil {
 		return types.ContainerJSON{}, err
 	}

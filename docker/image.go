@@ -6,13 +6,19 @@ import (
 
 	"golang.org/x/net/context"
 
+	// FIXME(vdemeester) replace this with docker/distribution reference package
 	"github.com/docker/docker/reference"
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 )
 
-func (p *Project) ensureImageExists(image string) error {
-	distributionRef, err := reference.ParseNamed(image)
+// Pull pulls the given reference (image)
+func (p *Project) Pull(ref string) error {
+	return p.ensureImageExists(ref, true)
+}
+
+func (p *Project) ensureImageExists(ref string, force bool) error {
+	distributionRef, err := reference.ParseNamed(ref)
 	if err != nil {
 		return err
 	}
@@ -27,13 +33,15 @@ func (p *Project) ensureImageExists(image string) error {
 		tag = x.Tag()
 	}
 
-	// Check if image is already there
-	_, _, err = p.Client.ImageInspectWithRaw(context.Background(), image, false)
-	if err != nil && !client.IsErrImageNotFound(err) {
-		return err
-	}
-	if err == nil {
-		return nil
+	if !force {
+		// Check if ref is already there
+		_, _, err = p.Client.ImageInspectWithRaw(context.Background(), ref, false)
+		if err != nil && !client.IsErrImageNotFound(err) {
+			return err
+		}
+		if err == nil {
+			return nil
+		}
 	}
 
 	// And pull it
