@@ -10,7 +10,7 @@ RUN go get github.com/golang/lint/golint
 RUN go get golang.org/x/tools/cmd/vet
 
 # Which docker version to test on
-ENV DOCKER_VERSION 1.10.0
+ENV DOCKER_VERSION 1.10.3
 
 # enable GO15VENDOREXPERIMENT
 ENV GO15VENDOREXPERIMENT 1
