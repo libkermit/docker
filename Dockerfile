@@ -1,4 +1,4 @@
-FROM golang:1.5.3
+FROM golang:1.6
 
 RUN apt-get update && apt-get install -y \
     build-essential \
