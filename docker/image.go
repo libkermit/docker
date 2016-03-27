@@ -11,7 +11,7 @@ import (
 	"github.com/docker/engine-api/types"
 )
 
-func ensureImageExists(cli client.APIClient, image string) error {
+func (p *Project) ensureImageExists(image string) error {
 	distributionRef, err := reference.ParseNamed(image)
 	if err != nil {
 		return err
@@ -28,7 +28,7 @@ func ensureImageExists(cli client.APIClient, image string) error {
 	}
 
 	// Check if image is already there
-	_, _, err = cli.ImageInspectWithRaw(context.Background(), image, false)
+	_, _, err = p.Client.ImageInspectWithRaw(context.Background(), image, false)
 	if err != nil && !client.IsErrImageNotFound(err) {
 		return err
 	}
@@ -41,7 +41,7 @@ func ensureImageExists(cli client.APIClient, image string) error {
 		ImageID: distributionRef.Name(),
 		Tag:     tag,
 	}
-	responseBody, err := cli.ImagePull(context.Background(), options, nil)
+	responseBody, err := p.Client.ImagePull(context.Background(), options, nil)
 	if err != nil {
 		fmt.Printf("%v", err)
 		return err

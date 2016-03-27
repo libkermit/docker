@@ -45,14 +45,20 @@ import (
 )
 
 func TestItMyFriend(t *testing.T) {
-    container, err := docker.Start("vdemeester/myawesomeimage")
+    project, err := docker.NewProjectFromEnv()
+    if err != nil {
+        t.Fatal(err)
+    }
+    container, err := p.Start("vdemeester/myawesomeimage")
     if err != nil {
         t.Fatal(err)
     }
 
     // Do your stuff
+    // […]
 
-    err = docker.Stop(container.ID)
+    // Clean the containers managed by libkermit
+    err = docker.Clean()
     if err != nil {
         t.Fatal(err)
     }

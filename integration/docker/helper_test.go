@@ -12,11 +12,11 @@ import (
 	"github.com/vdemeester/libkermit/docker"
 )
 
-func setupTest(t *testing.T) {
-	cleanContainers(t)
+func setupTest(t *testing.T) *docker.Project {
+	return cleanContainers(t)
 }
 
-func cleanContainers(t *testing.T) {
+func cleanContainers(t *testing.T) *docker.Project {
 	client, err := dockerclient.NewEnvClient()
 	if err != nil {
 		t.Fatal(err)
@@ -44,4 +44,6 @@ func cleanContainers(t *testing.T) {
 			t.Errorf("Error while removing container %s : %v\n", container.ID, err)
 		}
 	}
+
+	return docker.NewProject(client)
 }
