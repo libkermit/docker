@@ -6,7 +6,6 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/docker/docker/pkg/namesgenerator"
-	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/container"
 	"github.com/docker/engine-api/types/strslice"
@@ -14,33 +13,19 @@ import (
 
 // Create lets you create a container with the specified image, and default
 // configuration.
-func Create(image string) (types.ContainerJSON, error) {
-	client, err := client.NewEnvClient()
-	if err != nil {
-		return types.ContainerJSON{}, err
-	}
-
-	return create(client, image, ContainerConfig{})
+func (p *Project) Create(image string) (types.ContainerJSON, error) {
+	return p.CreateWithConfig(image, ContainerConfig{})
 }
 
 // CreateWithConfig lets you create a container with the specified image, and
 // some custom simple configuration.
-func CreateWithConfig(image string, config ContainerConfig) (types.ContainerJSON, error) {
-	client, err := client.NewEnvClient()
+func (p *Project) CreateWithConfig(image string, containerConfig ContainerConfig) (types.ContainerJSON, error) {
+	err := p.ensureImageExists(image)
 	if err != nil {
 		return types.ContainerJSON{}, err
 	}
 
-	return create(client, image, config)
-}
-
-func create(client client.APIClient, image string, containerConfig ContainerConfig) (types.ContainerJSON, error) {
-	err := ensureImageExists(client, image)
-	if err != nil {
-		return types.ContainerJSON{}, err
-	}
-
-	labels := mergeLabels(KermitLabels, containerConfig.Labels)
+	labels := mergeLabels(p.Labels, containerConfig.Labels)
 	config := &container.Config{
 		Image:  image,
 		Labels: labels,
@@ -60,12 +45,12 @@ func create(client client.APIClient, image string, containerConfig ContainerConf
 		containerName = fmt.Sprintf("kermit_%s", namesgenerator.GetRandomName(10))
 	}
 
-	response, err := client.ContainerCreate(context.Background(), config, &container.HostConfig{}, nil, containerName)
+	response, err := p.Client.ContainerCreate(context.Background(), config, &container.HostConfig{}, nil, containerName)
 	if err != nil {
 		return types.ContainerJSON{}, err
 	}
 
-	return inspect(client, response.ID)
+	return p.Inspect(response.ID)
 }
 
 func mergeLabels(defaultLabels, additionnalLabels map[string]string) map[string]string {

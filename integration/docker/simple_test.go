@@ -3,14 +3,12 @@ package dockerit
 import (
 	"strings"
 	"testing"
-
-	"github.com/vdemeester/libkermit/docker"
 )
 
 func TestCreateSimple(t *testing.T) {
-	setupTest(t)
+	project := setupTest(t)
 
-	container, err := docker.Create("busybox")
+	container, err := project.Create("busybox")
 
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -24,9 +22,9 @@ func TestCreateSimple(t *testing.T) {
 }
 
 func TestStartAndStop(t *testing.T) {
-	setupTest(t)
+	project := setupTest(t)
 
-	container, err := docker.Start("busybox")
+	container, err := project.Start("busybox")
 
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
@@ -41,12 +39,12 @@ func TestStartAndStop(t *testing.T) {
 		t.Fatalf("expected container to be running, but was in state %v", container.State)
 	}
 
-	err = docker.Stop(container.ID)
+	err = project.Stop(container.ID)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	container, err = docker.Inspect(container.ID)
+	container, err = project.Inspect(container.ID)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
