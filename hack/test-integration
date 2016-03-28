@@ -6,6 +6,7 @@ bundle_test_integration() {
 	go_test_dir ./integration/docker
         go_test_dir ./integration/docker/testing
         go_test_dir ./integration/compose
+        go_test_dir ./integration/compose/testing
         # hum wonder how to handle that
 }
 
