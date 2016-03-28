@@ -15,7 +15,7 @@ import (
 // Project holds docker related project attributes, like docker client, labels
 // to put on the containers, and so on.
 type Project struct {
-	project docker.Project
+	project *docker.Project
 }
 
 // NewProjectFromEnv creates a project with a client that is build from environment variables.
@@ -30,7 +30,7 @@ func NewProjectFromEnv(t *testing.T) *Project {
 // NewProject creates a project with the given client and the default attributes.
 func NewProject(client client.APIClient) *Project {
 	return &Project{
-		project: docker.Project{
+		project: &docker.Project{
 			Client: client,
 			Labels: docker.KermitLabels,
 		},
