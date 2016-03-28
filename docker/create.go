@@ -2,10 +2,10 @@ package docker
 
 import (
 	"fmt"
+	"math/rand"
 
 	"golang.org/x/net/context"
 
-	"github.com/docker/docker/pkg/namesgenerator"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/container"
 	"github.com/docker/engine-api/types/strslice"
@@ -42,7 +42,7 @@ func (p *Project) CreateWithConfig(image string, containerConfig ContainerConfig
 	if containerConfig.Name != "" {
 		containerName = containerConfig.Name
 	} else {
-		containerName = fmt.Sprintf("kermit_%s", namesgenerator.GetRandomName(10))
+		containerName = fmt.Sprintf("kermit_%s", randSeq(10))
 	}
 
 	response, err := p.Client.ContainerCreate(context.Background(), config, &container.HostConfig{}, nil, containerName)
@@ -65,4 +65,14 @@ func mergeLabels(defaultLabels, additionnalLabels map[string]string) map[string]
 		labels[key] = value
 	}
 	return labels
+}
+
+var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
+func randSeq(n int) string {
+	b := make([]rune, n)
+	for i := range b {
+		b[i] = letters[rand.Intn(len(letters))]
+	}
+	return string(b)
 }

@@ -7,7 +7,7 @@ import (
 	"golang.org/x/net/context"
 
 	// FIXME(vdemeester) replace this with docker/distribution reference package
-	"github.com/docker/docker/reference"
+	"github.com/docker/distribution/reference"
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 )
@@ -22,15 +22,16 @@ func (p *Project) ensureImageExists(ref string, force bool) error {
 	if err != nil {
 		return err
 	}
-	if reference.IsNameOnly(distributionRef) {
-		distributionRef = reference.WithDefaultTag(distributionRef)
-	}
+
 	var tag string
 	switch x := distributionRef.(type) {
 	case reference.Canonical:
 		tag = x.Digest().String()
 	case reference.NamedTagged:
 		tag = x.Tag()
+	default:
+		// FIXME(vdemeester) this will go at some point :D
+		tag = "latest"
 	}
 
 	if !force {
