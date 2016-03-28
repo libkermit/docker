@@ -49,7 +49,7 @@ func TestItMyFriend(t *testing.T) {
     if err != nil {
         t.Fatal(err)
     }
-    container, err := p.Start("vdemeester/myawesomeimage")
+    container, err := project.Start("vdemeester/myawesomeimage")
     if err != nil {
         t.Fatal(err)
     }
@@ -58,7 +58,7 @@ func TestItMyFriend(t *testing.T) {
     // […]
 
     // Clean the containers managed by libkermit
-    err = docker.Clean()
+    err = project.Clean()
     if err != nil {
         t.Fatal(err)
     }
@@ -83,13 +83,13 @@ import (
 
 func TestItMyFriend(t *testing.T) {
     project := docker.NewProjectFromEnv(t)
-    container := p.Start(t, "vdemeester/myawesomeimage")
+    container := project.Start(t, "vdemeester/myawesomeimage")
 
     // Do your stuff
     // […]
 
     // Clean the containers managed by libkermit
-    docker.Clean(t)
+    project.Clean(t)
 }
 ```
 
@@ -119,13 +119,13 @@ var _ = check.Suite(&CheckSuite{})
 
 func (s *CheckSuite) TestItMyFriend(c *check.C) {
     project := docker.NewProjectFromEnv(c)
-    container := p.Start(c, "vdemeester/myawesomeimage")
+    container := project.Start(c, "vdemeester/myawesomeimage")
 
     // Do your stuff
     // […]
 
     // Clean the containers managed by libkermit
-    docker.Clean(c)
+    project.Clean(c)
 }
 ```
 
