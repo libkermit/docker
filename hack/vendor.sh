@@ -24,4 +24,7 @@ clone git github.com/flynn/go-shlex 3f9db97f856818214da2e1057f8ad84803971cff
 clone git github.com/gorilla/context 14f550f51a
 clone git github.com/gorilla/mux e444e69cbd
 
+# gocheck related
+clone git github.com/go-check/check 4f90aeace3a26ad7021961c297b22c42160c7b25
+
 clean && mv vendor/src/* vendor

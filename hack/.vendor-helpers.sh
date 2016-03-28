@@ -70,6 +70,10 @@ clean() {
 		"${PROJECT}/" # package main
 		"${PROJECT}/compose" # package compose
 		"${PROJECT}/docker" # package docker
+		"${PROJECT}/compose/testing" # package compose/testing
+		"${PROJECT}/docker/testing" # package docker/testing
+		"${PROJECT}/compose/check" # package compose/check
+		"${PROJECT}/docker/check" # package docker/check
 		"${PROJECT}/integration" # external tests
 	)
 	local dockerPlatforms=( linux/amd64 $(_dockerfile_env DOCKER_CROSSPLATFORMS) )
