@@ -4,6 +4,7 @@ set -e
 bundle_test_integration() {
 	TESTFLAGS="$TESTFLAGS"
 	go_test_dir ./integration/docker
+        go_test_dir ./integration/docker/testing
         go_test_dir ./integration/compose
         # hum wonder how to handle that
 }

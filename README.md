@@ -65,6 +65,33 @@ func TestItMyFriend(t *testing.T) {
 }
 ```
 
+### Package `docker/testing`
+
+This package map the `docker` package but takes a `*testing.T` struct
+on all methods. The idea is to write even less. Let's write the same
+example as above.
+
+
+```go
+package yours
+
+import (
+    "testing"
+
+    docker "github.com/vdemeester/libkermit/docker/testing"
+)
+
+func TestItMyFriend(t *testing.T) {
+    project := docker.NewProjectFromEnv(t)
+    container := p.Start(t, "vdemeester/myawesomeimage")
+
+    // Do your stuff
+    // […]
+
+    // Clean the containers managed by libkermit
+    docker.Clean(t)
+}
+```
 
 
 ## Package `compose`
