@@ -93,6 +93,42 @@ func TestItMyFriend(t *testing.T) {
 }
 ```
 
+### Package `docker/check`
+
+This package map the `docker` package but takes a `*check.C` struct
+on all methods. The idea is to write even less. Let's write the same
+example as above.
+
+
+```go
+package yours
+
+import (
+    "testing"
+
+	"github.com/go-check/check"
+    docker "github.com/vdemeester/libkermit/docker/check"
+)
+
+// Hook up gocheck into the "go test" runner
+func Test(t *testing.T) { check.TestingT(t) }
+
+type CheckSuite struct{}
+
+var _ = check.Suite(&CheckSuite{})
+
+func (s *CheckSuite) TestItMyFriend(c *check.C) {
+    project := docker.NewProjectFromEnv(c)
+    container := p.Start(c, "vdemeester/myawesomeimage")
+
+    // Do your stuff
+    // […]
+
+    // Clean the containers managed by libkermit
+    docker.Clean(c)
+}
+```
+
 
 ## Package `compose`
 
@@ -123,6 +159,66 @@ func TestItMyFriend(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
+```
+
+### Package `compose/testing`
+
+This package map the `compose` package but takes a `*testing.T` struct
+on all methods. The idea is to write even less. Let's write the same
+example as above.
+
+
+```go
+package yours
+
+import (
+    "testing"
+
+    docker "github.com/vdemeester/libkermit/compose/testing"
+)
+
+func TestItMyFriend(t *testing.T) {
+    project := compose.CreateProject(t, "simple", "./assets/simple.yml")
+    project.Start(t)
+
+    // Do your stuff
+
+    project.Stop(t)
+}
+```
+
+### Package `compose/check`
+
+This package map the `compose` package but takes a `*check.C` struct
+on all methods. The idea is to write even less. Let's write the same
+example as above.
+
+
+```go
+package yours
+
+import (
+    "testing"
+
+	"github.com/go-check/check"
+    docker "github.com/vdemeester/libkermit/compose/check"
+)
+
+// Hook up gocheck into the "go test" runner
+func Test(t *testing.T) { check.TestingT(t) }
+
+type CheckSuite struct{}
+
+var _ = check.Suite(&CheckSuite{})
+
+func (s *CheckSuite) TestItMyFriend(c *check.C) {
+    project := compose.CreateProject(c, "simple", "./assets/simple.yml")
+    project.Start(c)
+
+    // Do your stuff
+
+    project.Stop(c)
 }
 ```
 
