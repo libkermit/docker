@@ -5,6 +5,7 @@ package testing
 import (
 	"testing"
 
+	"github.com/docker/engine-api/types"
 	"github.com/vdemeester/libkermit/compose"
 )
 
@@ -37,4 +38,30 @@ func (p *Project) Stop(t *testing.T) {
 	if err := p.project.Stop(); err != nil {
 		t.Fatalf("error while stopping compose project: %s", err.Error())
 	}
+}
+
+// Scale scale a service up
+func (p *Project) Scale(t *testing.T, service string, count int) {
+	if err := p.project.Scale(service, count); err != nil {
+		t.Fatalf("error while scaling the service '%s'", service)
+	}
+}
+
+// Containers lists containers for a given services.
+func (p *Project) Containers(t *testing.T, service string) []types.ContainerJSON {
+	containers, err := p.project.Containers(service)
+	if err != nil {
+		t.Fatalf("error while getting the containers for service '%s'", service)
+	}
+	return containers
+}
+
+// Container return the one and only container for a given services.
+// It fails if there is more than one container for the service.
+func (p *Project) Container(t *testing.T, service string) types.ContainerJSON {
+	container, err := p.project.Container(service)
+	if err != nil {
+		t.Fatalf("error while getting the container for service '%s'", service)
+	}
+	return container
 }
