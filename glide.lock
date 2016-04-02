@@ -1,0 +1,130 @@
+hash: 8912ee1b11ad96b1b77edc227bfce92c20092b64b770e7bde9583f604147b91c
+updated: 2016-04-02T00:10:09.815033405+02:00
+imports:
+- name: github.com/Azure/go-ansiterm
+  version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
+  subpackages:
+  - winterm
+- name: github.com/cloudfoundry-incubator/candiedyaml
+  version: 479485e9bfc69ee37d074b36ce36da5e4fba7941
+- name: github.com/docker/distribution
+  version: ff6f38ccb69afa96214c7ee955359465d1fc767a
+  subpackages:
+  - reference
+  - digest
+  - registry/api/errcode
+  - registry/client/auth
+  - registry/client/transport
+  - registry/client
+  - context
+  - registry/api/v2
+  - registry/storage/cache
+  - registry/storage/cache/memory
+  - uuid
+- name: github.com/docker/docker
+  version: 0f5c9d301b9b1cca66b3ea0f9dec3b5317d3686d
+  subpackages:
+  - builder
+  - builder/dockerignore
+  - cliconfig
+  - pkg/archive
+  - pkg/fileutils
+  - pkg/homedir
+  - pkg/jsonmessage
+  - pkg/progress
+  - pkg/stdcopy
+  - pkg/streamformatter
+  - pkg/term
+  - reference
+  - registry
+  - runconfig/opts
+  - api/types/backend
+  - pkg/chrootarchive
+  - pkg/gitutils
+  - pkg/httputils
+  - pkg/ioutils
+  - pkg/longpath
+  - pkg/symlink
+  - pkg/tarsum
+  - pkg/urlutil
+  - pkg/idtools
+  - pkg/pools
+  - pkg/promise
+  - pkg/system
+  - pkg/jsonlog
+  - pkg/term/windows
+  - image
+  - image/v1
+  - opts
+  - pkg/mflag
+  - pkg/stringid
+  - pkg/mount
+  - pkg/signal
+  - pkg/reexec
+  - layer
+  - pkg/parsers
+  - pkg/ulimit
+  - volume
+- name: github.com/docker/engine-api
+  version: 8924d6900370b4c7e7984be5adc61f50a80d7537
+  subpackages:
+  - client
+  - types
+  - types/container
+  - types/filters
+  - types/strslice
+  - types/network
+  - client/transport
+  - client/transport/cancellable
+  - types/registry
+  - types/time
+  - types/blkiodev
+- name: github.com/docker/go-connections
+  version: f549a9393d05688dff0992ef3efd8bbe6c628aeb
+  subpackages:
+  - nat
+  - sockets
+  - tlsconfig
+- name: github.com/docker/go-units
+  version: 5d2041e26a699eaca682e2ea41c8f891e1060444
+- name: github.com/docker/libcompose
+  version: f02daa466c54902f8e1ac8870546c2312768d964
+  subpackages:
+  - docker
+  - project
+  - logger
+  - lookup
+  - utils
+  - version
+- name: github.com/flynn/go-shlex
+  version: 3f9db97f856818214da2e1057f8ad84803971cff
+- name: github.com/go-check/check
+  version: 4f90aeace3a26ad7021961c297b22c42160c7b25
+- name: github.com/gorilla/context
+  version: 14f550f51af52180c2eefed15e5fd18d63c0a64a
+- name: github.com/gorilla/mux
+  version: e444e69cbd2e2e3e0749a2f3c717cec491552bbf
+- name: github.com/Microsoft/go-winio
+  version: 9e2895e5f6c3f16473b91d37fae6e89990a4520c
+- name: github.com/opencontainers/runc
+  version: 89ab7f2ccc1e45ddf6485eaa802c35dcf321dfc8
+  subpackages:
+  - libcontainer/user
+- name: github.com/Sirupsen/logrus
+  version: 4b6ea7319e214d98c938f12692336f7ca9348d6b
+- name: github.com/xeipuuv/gojsonpointer
+  version: e0fe6f68307607d540ed8eac07a342c33fa1b54a
+- name: github.com/xeipuuv/gojsonreference
+  version: e02fc20de94c78484cd5ffb007f8af96be030a45
+- name: github.com/xeipuuv/gojsonschema
+  version: 93e72a773fade158921402d6a24c819b48aba29d
+- name: golang.org/x/net
+  version: 4876518f9e71663000c348837735820161a42df7
+  subpackages:
+  - context
+  - proxy
+- name: golang.org/x/sys
+  version: 320cb01ddbbf0473674c2585f9b6e245721de355
+  subpackages:
+  - unix
+devImports: []
