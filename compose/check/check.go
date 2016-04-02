@@ -1,4 +1,4 @@
-// Package testing aims to provide simple "helper" methods to ease the use of
+// Package check aims to provide simple "helper" methods to ease the use of
 // compose (through libcompose) in (integration) tests using the go-check package.
 package check
 

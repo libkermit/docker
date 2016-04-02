@@ -3,7 +3,7 @@
 //
 // It does support a subset of options compared to actual client api, as it
 // is more focused on needs for integration tests.
-package testing
+package check
 
 import (
 	"github.com/go-check/check"

@@ -1,4 +1,4 @@
-package testing
+package check
 
 import (
 	"github.com/go-check/check"

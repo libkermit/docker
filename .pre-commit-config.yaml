@@ -7,4 +7,3 @@
     hooks:
     -   id: goFmt
     -   id: goLint
-    -   id: goErrcheck
