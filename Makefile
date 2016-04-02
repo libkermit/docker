@@ -40,6 +40,12 @@ validate-govet: build
 validate-golint: build
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh validate-golint
 
+lint:
+	./hack/make.sh validate-golint
+
+fmt:
+	./hack/make.sh validate-gofmt
+
 build: dist
 	docker build -t "$(LIBKERMIT_DEV_IMAGE)" .
 
