@@ -14,7 +14,7 @@ INTEGRATION_OPTS := $(if $(MAKE_DOCKER_HOST),-e "DOCKER_HOST=$(MAKE_DOCKER_HOST)
 
 DOCKER_RUN_LIBKERMIT := docker run $(if $(CIRCLECI),,--rm) $(INTEGRATION_OPTS) -it $(LIBKERMIT_ENVS) $(LIBKERMIT_MOUNT) "$(LIBKERMIT_DEV_IMAGE)"
 
-default: binary
+default: all
 
 all: build
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh

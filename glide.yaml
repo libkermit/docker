@@ -1,0 +1,20 @@
+package: github.com/vdemeester/libkermit
+import:
+- package: github.com/docker/distribution
+  subpackages:
+  - reference
+- package: github.com/docker/engine-api
+  subpackages:
+  - client
+  - types
+  - types/container
+  - types/filters
+  - types/strslice
+- package: github.com/docker/libcompose
+  subpackages:
+  - docker
+  - project
+- package: github.com/go-check/check
+- package: golang.org/x/net
+  subpackages:
+  - context
