@@ -88,7 +88,7 @@ imports:
 - name: github.com/docker/go-units
   version: 5d2041e26a699eaca682e2ea41c8f891e1060444
 - name: github.com/docker/libcompose
-  version: f02daa466c54902f8e1ac8870546c2312768d964
+  version: b8bd316f4a8a4dd7372871862584e22f10ba7259
   subpackages:
   - docker
   - project
