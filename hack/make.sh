@@ -11,7 +11,7 @@ DEFAULT_BUNDLES=(
         test-integration
 )
 
-TESTFLAGS+=" -test.timeout=10m"
+TESTFLAGS+="-race -test.timeout=10m"
 
 # If $TESTFLAGS is set in the environment, it is passed as extra arguments to 'go test'.
 # You can use this to select certain tests to run, eg.

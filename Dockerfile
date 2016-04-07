@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y \
 # Install build dependencies
 RUN go get golang.org/x/tools/cmd/cover \
     && go get github.com/golang/lint/golint \
-    && go get golang.org/x/tools/cmd/vet \
     && go get github.com/Masterminds/glide 
 
 # Which docker version to test on
