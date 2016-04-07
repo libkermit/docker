@@ -16,29 +16,20 @@ DOCKER_RUN_LIBKERMIT := docker run $(if $(CIRCLECI),,--rm) $(INTEGRATION_OPTS) -
 
 default: all
 
-all: build
+all: build ## validate all checks, run all tests
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh
 
-test: build
+test: build ## run the unit and integration tests
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-unit test-integration
 
-test-integration: build
+test-integration: build ## run the integration tests
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-integration
 
-test-unit: build
+test-unit: build ## run the unit tests
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh test-unit
 
-validate: build
+validate: build ## validate gofmt, golint and go vet
 	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh validate-gofmt validate-govet validate-golint
-
-validate-gofmt: build
-	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh validate-gofmt
-
-validate-govet: build
-	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh validate-govet
-
-validate-golint: build
-	$(DOCKER_RUN_LIBKERMIT) ./hack/make.sh validate-golint
 
 lint:
 	./hack/make.sh validate-golint
@@ -49,9 +40,11 @@ fmt:
 build: dist
 	docker build -t "$(LIBKERMIT_DEV_IMAGE)" .
 
-shell: build
+shell: build ## start a shell inside the build env
 	$(DOCKER_RUN_LIBKERMIT) /bin/bash
 
 dist:
 	mkdir dist
 
+help: ## this help
+	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {sub("\\\\n",sprintf("\n%22c"," "), $$2);printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
