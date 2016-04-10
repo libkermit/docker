@@ -1,6 +1,6 @@
 # Libkermit
 [![GoDoc](https://godoc.org/github.com/vdemeester/libkermit?status.png)](https://godoc.org/github.com/vdemeester/libkermit)
-[![Build Status](https://travis-ci.org/vdemeester/libkermit.svg?branch=add-readme)](https://travis-ci.org/vdemeester/libkermit)
+[![Build Status](https://travis-ci.org/vdemeester/libkermit.svg?branch=master)](https://travis-ci.org/vdemeester/libkermit)
 [![Go Report Card](https://goreportcard.com/badge/github.com/vdemeester/libkermit)](https://goreportcard.com/report/github.com/vdemeester/libkermit)
 [![License](https://img.shields.io/github/license/vdemeester/libkermit.svg)]()
 
