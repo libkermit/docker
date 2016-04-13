@@ -37,9 +37,8 @@ func cleanContainers(t *testing.T) *docker.Project {
 
 	for _, container := range containers {
 		t.Logf("cleaning container %s…", container.ID)
-		if err := client.ContainerRemove(context.Background(), types.ContainerRemoveOptions{
-			ContainerID: container.ID,
-			Force:       true,
+		if err := client.ContainerRemove(context.Background(), container.ID, types.ContainerRemoveOptions{
+			Force: true,
 		}); err != nil {
 			t.Errorf("Error while removing container %s : %v\n", container.ID, err)
 		}

@@ -8,9 +8,8 @@ import (
 
 // Remove removes the container
 func (p *Project) Remove(containerID string) error {
-	if err := p.Client.ContainerRemove(context.Background(), types.ContainerRemoveOptions{
-		ContainerID: containerID,
-		Force:       true,
+	if err := p.Client.ContainerRemove(context.Background(), containerID, types.ContainerRemoveOptions{
+		Force: true,
 	}); err != nil {
 		return err
 	}
