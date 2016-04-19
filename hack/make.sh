@@ -39,10 +39,6 @@ bundle() {
     source "hack/$bundle" "$@"
 }
 
-docker version
-
-echo $DOCKER_API_VERSION
-
 if [ $# -lt 1 ]; then
     bundles=(${DEFAULT_BUNDLES[@]})
 else

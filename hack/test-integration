@@ -1,19 +1,33 @@
 #!/bin/bash
 set -e
 
-bundle_test_integration() {
-	TESTFLAGS="$TESTFLAGS"
-	go_test_dir ./integration/docker
-        go_test_dir ./integration/docker/check
-        go_test_dir ./integration/docker/testing
-        go_test_dir ./integration/compose
-        go_test_dir ./integration/compose/check
-        go_test_dir ./integration/compose/testing
-        # hum wonder how to handle that
+run_integration_test() {
+    echo "Running integration test against ${DOCKER_DAEMON_VERSION}"
+    bundle .integration-daemon-start
+    
+    TESTFLAGS="$TESTFLAGS"
+    go_test_dir ./integration/docker
+    go_test_dir ./integration/docker/check
+    go_test_dir ./integration/docker/testing
+    go_test_dir ./integration/compose
+    go_test_dir ./integration/compose/check
+    go_test_dir ./integration/compose/testing
+
+    bundle .integration-daemon-stop
+    echo
 }
 
-# subshell so that we can export PATH without breaking other things
 (
-	export GO15VENDOREXPERIMENT=1
-	bundle_test_integration
+    if test -n "${DAEMON_VERSION}" && test "${DAEMON_VERSION}" != "all"; then
+        if test "${DAEMON_VERSION}" = "default"; then
+            DAEMON_VERSION="${DEFAULT_DOCKER_VERSION}"
+        fi
+        for version in $(echo ${DAEMON_VERSION} | cut -f1); do
+            DOCKER_DAEMON_VERSION="${version}" run_integration_test
+        done
+    else
+        for version in $(echo ${DOCKER_VERSIONS} | cut -f1); do
+            DOCKER_DAEMON_VERSION="${version}" run_integration_test
+        done
+    fi
 ) 2>&1

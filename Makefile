@@ -1,6 +1,6 @@
 .PHONY: all
 
-LIBCOMPOSE_ENVS := \
+LIBKERMIT_ENVS := \
 	-e DOCKER_TEST_HOST \
 	-e TESTFLAGS
 
@@ -10,9 +10,9 @@ LIBKERMIT_MOUNT := -v "$(CURDIR)/$(BIND_DIR):/go/src/github.com/vdemeester/libke
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null)
 LIBKERMIT_DEV_IMAGE := libkermit-dev$(if $(GIT_BRANCH),:$(GIT_BRANCH))
 REPONAME := $(shell echo $(REPO) | tr '[:upper:]' '[:lower:]')
-INTEGRATION_OPTS := $(if $(MAKE_DOCKER_HOST),-e "DOCKER_HOST=$(MAKE_DOCKER_HOST)", -v "/var/run/docker.sock:/var/run/docker.sock")
 
-DOCKER_RUN_LIBKERMIT := docker run $(if $(CIRCLECI),,--rm) $(INTEGRATION_OPTS) -it $(LIBKERMIT_ENVS) $(LIBKERMIT_MOUNT) "$(LIBKERMIT_DEV_IMAGE)"
+DAEMON_VERSION := $(if $(DAEMON_VERSION),$(DAEMON_VERSION),"default")
+DOCKER_RUN_LIBKERMIT := docker run --rm --privileged -it -e DAEMON_VERSION="$(DAEMON_VERSION)" $(LIBKERMIT_ENVS) $(LIBKERMIT_MOUNT) "$(LIBKERMIT_DEV_IMAGE)"
 
 default: all
 
