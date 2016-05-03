@@ -14,7 +14,6 @@ import:
   subpackages:
   - docker
   - project
-- package: github.com/go-check/check
 - package: golang.org/x/net
   subpackages:
   - context
