@@ -1,5 +1,5 @@
 # Libkermit
-[![GoDoc](https://godoc.org/github.com/libkermit/docker?status.png)](https://godoc.org/github.com/libkermit)
+[![GoDoc](https://godoc.org/github.com/libkermit/docker?status.png)](https://godoc.org/github.com/libkermit/docker)
 [![Build Status](https://travis-ci.org/libkermit/docker.svg?branch=master)](https://travis-ci.org/libkermit/docker)
 [![Go Report Card](https://goreportcard.com/badge/github.com/libkermit/docker)](https://goreportcard.com/report/github.com/libkermit/docker)
 [![License](https://img.shields.io/github/license/libkermit/docker.svg)]()
