@@ -8,8 +8,8 @@ import (
 	"github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/filters"
-	"github.com/vdemeester/libkermit/compose"
-	"github.com/vdemeester/libkermit/docker"
+	"github.com/libkermit/docker"
+	"github.com/libkermit/docker/compose"
 )
 
 func TestSimpleProject(t *testing.T) {

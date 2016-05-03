@@ -1,15 +1,15 @@
-// Package check aims to provide simple "helper" methods to ease the use of
-// docker in (integration) tests using the go-check testing package.
+// Package testing aims to provide simple "helper" methods to ease the use of
+// docker in (integration) tests using the testing built-in package.
 //
 // It does support a subset of options compared to actual client api, as it
 // is more focused on needs for integration tests.
-package check
+package testing
 
 import (
-	"github.com/go-check/check"
+	"testing"
 
 	"github.com/docker/engine-api/client"
-	"github.com/vdemeester/libkermit/docker"
+	"github.com/libkermit/docker"
 )
 
 // Project holds docker related project attributes, like docker client, labels
@@ -19,9 +19,11 @@ type Project struct {
 }
 
 // NewProjectFromEnv creates a project with a client that is build from environment variables.
-func NewProjectFromEnv(c *check.C) *Project {
+func NewProjectFromEnv(t *testing.T) *Project {
 	client, err := client.NewEnvClient()
-	c.Assert(err, check.IsNil, check.Commentf("Error while getting a docker client from env"))
+	if err != nil {
+		t.Fatalf("Error while getting a docker client from env: %s", err.Error())
+	}
 	return NewProject(client)
 }
 

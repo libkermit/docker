@@ -9,7 +9,7 @@ import (
 	"github.com/docker/engine-api/types"
 	// "github.com/docker/engine-api/types/container"
 	"github.com/docker/engine-api/types/filters"
-	"github.com/vdemeester/libkermit/docker"
+	"github.com/libkermit/docker"
 )
 
 func setupTest(t *testing.T) *docker.Project {

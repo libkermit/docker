@@ -31,7 +31,7 @@ RUN set -e; \
 # Set the default Docker to be run
 RUN ln -s /usr/local/bin/docker-${DEFAULT_DOCKER_VERSION} /usr/local/bin/docker
     
-WORKDIR /go/src/github.com/vdemeester/libkermit
+WORKDIR /go/src/github.com/libkermit/docker
 
 COPY glide.yaml glide.yaml
 COPY glide.lock glide.lock
@@ -40,4 +40,4 @@ RUN glide install
 # Wrap all commands in the "docker-in-docker" script to allow nested containers
 ENTRYPOINT ["hack/dind"]
 
-COPY . /go/src/github.com/vdemeester/libkermit
+COPY . /go/src/github.com/libkermit/docker

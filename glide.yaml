@@ -1,4 +1,4 @@
-package: github.com/vdemeester/libkermit
+package: github.com/libkermit/docker
 import:
 - package: github.com/docker/distribution
   subpackages:

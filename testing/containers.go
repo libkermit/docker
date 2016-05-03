@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/docker/engine-api/types"
-	"github.com/vdemeester/libkermit/docker"
+	"github.com/libkermit/docker"
 )
 
 // Create lets you create a container with the specified image, and default

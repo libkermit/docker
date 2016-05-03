@@ -5,7 +5,7 @@ LIBKERMIT_ENVS := \
 	-e TESTFLAGS
 
 BIND_DIR := "dist"
-LIBKERMIT_MOUNT := -v "$(CURDIR)/$(BIND_DIR):/go/src/github.com/vdemeester/libkermit/$(BIND_DIR)"
+LIBKERMIT_MOUNT := -v "$(CURDIR)/$(BIND_DIR):/go/src/github.com/libkermit/docker/$(BIND_DIR)"
 
 GIT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD 2>/dev/null)
 LIBKERMIT_DEV_IMAGE := libkermit-dev$(if $(GIT_BRANCH),:$(GIT_BRANCH))

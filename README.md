@@ -1,8 +1,8 @@
 # Libkermit
-[![GoDoc](https://godoc.org/github.com/vdemeester/libkermit?status.png)](https://godoc.org/github.com/vdemeester/libkermit)
-[![Build Status](https://travis-ci.org/vdemeester/libkermit.svg?branch=master)](https://travis-ci.org/vdemeester/libkermit)
-[![Go Report Card](https://goreportcard.com/badge/github.com/vdemeester/libkermit)](https://goreportcard.com/report/github.com/vdemeester/libkermit)
-[![License](https://img.shields.io/github/license/vdemeester/libkermit.svg)]()
+[![GoDoc](https://godoc.org/github.com/libkermit/docker?status.png)](https://godoc.org/github.com/libkermit)
+[![Build Status](https://travis-ci.org/libkermit/docker.svg?branch=master)](https://travis-ci.org/libkermit/docker)
+[![Go Report Card](https://goreportcard.com/badge/github.com/libkermit/docker)](https://goreportcard.com/report/github.com/libkermit/docker)
+[![License](https://img.shields.io/github/license/libkermit/docker.svg)]()
 
 
 > When green is all there is to be<br/>
@@ -46,7 +46,7 @@ package yours
 import (
     "testing"
 
-    "github.com/vdemeester/libkermit/docker"
+    "github.com/libkermit/docker"
 )
 
 func TestItMyFriend(t *testing.T) {
@@ -83,7 +83,7 @@ package yours
 import (
     "testing"
 
-    docker "github.com/vdemeester/libkermit/docker/testing"
+    docker "github.com/libkermit/docker/testing"
 )
 
 func TestItMyFriend(t *testing.T) {
@@ -108,7 +108,7 @@ package yours
 import (
     "testing"
 
-    "github.com/vdemeester/libkermit/compose"
+    "github.com/libkermit/docker/compose"
 )
 
 func TestItMyFriend(t *testing.T) {
@@ -143,7 +143,7 @@ package yours
 import (
     "testing"
 
-    docker "github.com/vdemeester/libkermit/compose/testing"
+    docker "github.com/libkermit/docker/compose/testing"
 )
 
 func TestItMyFriend(t *testing.T) {

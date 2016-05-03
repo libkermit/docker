@@ -8,8 +8,8 @@ import (
 	dockerclient "github.com/docker/engine-api/client"
 	"github.com/docker/engine-api/types"
 	"github.com/docker/engine-api/types/filters"
-	d "github.com/vdemeester/libkermit/docker"
-	docker "github.com/vdemeester/libkermit/docker/testing"
+	d "github.com/libkermit/docker"
+	docker "github.com/libkermit/docker/testing"
 )
 
 func setupTest(t *testing.T) *docker.Project {

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/docker/engine-api/types"
-	"github.com/vdemeester/libkermit/compose"
+	"github.com/libkermit/docker/compose"
 )
 
 // Project holds compose related project attributes
