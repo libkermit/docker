@@ -12,12 +12,15 @@ import (
 	"github.com/docker/engine-api/types/filters"
 	"github.com/docker/libcompose/docker"
 	"github.com/docker/libcompose/project"
+	"github.com/docker/libcompose/project/events"
+	"github.com/docker/libcompose/project/options"
 )
 
 // Project holds compose related project attributes
 type Project struct {
-	composeProject *project.Project
-	listenChan     chan project.Event
+	composeProject project.APIProject
+	name           string
+	listenChan     chan events.Event
 	started        chan struct{}
 	stopped        chan struct{}
 	deleted        chan struct{}
@@ -42,7 +45,8 @@ func CreateProject(name string, composeFiles ...string) (*Project, error) {
 	}
 	p := &Project{
 		composeProject: composeProject,
-		listenChan:     make(chan project.Event),
+		name:           name,
+		listenChan:     make(chan events.Event),
 		started:        make(chan struct{}),
 		stopped:        make(chan struct{}),
 		deleted:        make(chan struct{}),
@@ -58,7 +62,7 @@ func CreateProject(name string, composeFiles ...string) (*Project, error) {
 
 // Start creates and starts the compose project.
 func (p *Project) Start() error {
-	err := p.composeProject.Create()
+	err := p.composeProject.Create(options.Create{})
 	if err != nil {
 		return err
 	}
@@ -74,14 +78,14 @@ func (p *Project) Start() error {
 
 // Stop shuts down and clean the project
 func (p *Project) Stop() error {
-	err := p.composeProject.Down()
+	err := p.composeProject.Down(options.Down{})
 	if err != nil {
 		return err
 	}
 	<-p.stopped
 	close(p.stopped)
 
-	err = p.composeProject.Delete()
+	err = p.composeProject.Delete(options.Delete{})
 	if err != nil {
 		return err
 	}
@@ -92,23 +96,21 @@ func (p *Project) Stop() error {
 
 // Scale scale a service up
 func (p *Project) Scale(service string, count int) error {
-	s, err := p.composeProject.CreateService(service)
-	if err != nil {
-		return err
-	}
-	return s.Scale(count)
+	return p.composeProject.Scale(10, map[string]int{
+		service: count,
+	})
 }
 
 func (p *Project) startListening() {
 	for event := range p.listenChan {
 		// FIXME Add a timeout on event ?
-		if event.EventType == project.EventProjectStartDone {
+		if event.EventType == events.ProjectStartDone {
 			p.started <- struct{}{}
 		}
-		if event.EventType == project.EventProjectDownDone {
+		if event.EventType == events.ProjectDownDone {
 			p.stopped <- struct{}{}
 		}
-		if event.EventType == project.EventProjectDeleteDone {
+		if event.EventType == events.ProjectDeleteDone {
 			p.deleted <- struct{}{}
 		}
 	}
@@ -120,7 +122,7 @@ func (p *Project) Containers(service string) ([]types.ContainerJSON, error) {
 	// Let's use engine-api for now as there is nothing really useful in
 	// libcompose for now.
 	filter := filters.NewArgs()
-	filter.Add("label", "com.docker.compose.project="+p.composeProject.Name)
+	filter.Add("label", "com.docker.compose.project="+p.name)
 	filter.Add("label", "com.docker.compose.service="+service)
 	containerList, err := p.client.ContainerList(context.Background(), types.ContainerListOptions{
 		Filter: filter,
