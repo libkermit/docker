@@ -78,7 +78,8 @@ func (p *Project) Start() error {
 
 // Stop shuts down and clean the project
 func (p *Project) Stop() error {
-	err := p.composeProject.Down(options.Down{})
+	// FIXME(vdemeester) Add options to customize the timeout
+	err := p.composeProject.Stop(10)
 	if err != nil {
 		return err
 	}
@@ -107,7 +108,7 @@ func (p *Project) startListening() {
 		if event.EventType == events.ProjectStartDone {
 			p.started <- struct{}{}
 		}
-		if event.EventType == events.ProjectDownDone {
+		if event.EventType == events.ProjectStopDone {
 			p.stopped <- struct{}{}
 		}
 		if event.EventType == events.ProjectDeleteDone {

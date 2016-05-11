@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
 # Install build dependencies
 RUN go get golang.org/x/tools/cmd/cover \
     && go get github.com/golang/lint/golint \
-    && go get github.com/Masterminds/glide 
+    && go get github.com/kardianos/govendor 
 
 # Which docker version to test on and what default one to use
 ENV DOCKER_VERSIONS 1.10.3 1.11.0
@@ -33,9 +33,9 @@ RUN ln -s /usr/local/bin/docker-${DEFAULT_DOCKER_VERSION} /usr/local/bin/docker
     
 WORKDIR /go/src/github.com/libkermit/docker
 
-COPY glide.yaml glide.yaml
-COPY glide.lock glide.lock
-RUN glide install
+RUN mkdir vendor
+COPY vendor/vendor.json vendor/
+RUN govendor fetch +e
 
 # Wrap all commands in the "docker-in-docker" script to allow nested containers
 ENTRYPOINT ["hack/dind"]
