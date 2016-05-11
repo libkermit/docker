@@ -66,7 +66,7 @@ imports:
   - pkg/ulimit
   - volume
 - name: github.com/docker/engine-api
-  version: fd7f99d354831e7e809386087e7ec3129fdb1520
+  version: bfa0df7725b0b554d537782c2f74237880a82cc9
   subpackages:
   - client
   - types
