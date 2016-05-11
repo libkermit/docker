@@ -35,7 +35,7 @@ WORKDIR /go/src/github.com/libkermit/docker
 
 RUN mkdir vendor
 COPY vendor/vendor.json vendor/
-RUN govendor fetch +e +m
+RUN govendor fetch +e
 
 # Wrap all commands in the "docker-in-docker" script to allow nested containers
 ENTRYPOINT ["hack/dind"]
