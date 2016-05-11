@@ -2,21 +2,21 @@ package: github.com/libkermit/docker
 
 import:
 - package: github.com/Azure/go-ansiterm
-  version: 70b2c90b260171e829f1ebd7c17f600c11858dbe
+  version: 388960b655244e76e24c75f48631564eaefade62
 - package: github.com/cloudfoundry-incubator/candiedyaml
-  version: 479485e9bfc69ee37d074b36ce36da5e4fba7941
+  version: 5cef21e2e4f0fd147973b558d4db7395176bcd95
 - package: github.com/docker/distribution
-  version: ff6f38ccb69afa96214c7ee955359465d1fc767a
+  version: 467fc068d88aa6610691b7f1a677271a3fac4aac
 - package: github.com/docker/docker
-  version: 0f5c9d301b9b1cca66b3ea0f9dec3b5317d3686d
+  version: 9837ec4da53f15f9120d53a6e1517491ba8b0261
 - package: github.com/docker/engine-api
-  version: bfa0df7725b0b554d537782c2f74237880a82cc9
+  version: fd7f99d354831e7e809386087e7ec3129fdb1520
 - package: github.com/docker/go-connections
-  version: f549a9393d05688dff0992ef3efd8bbe6c628aeb
+  version: v0.2.0
 - package: github.com/docker/go-units
-  version: 5d2041e26a699eaca682e2ea41c8f891e1060444
+  version: 651fc226e7441360384da338d0fd37f2440ffbe3
 - package: github.com/docker/libcompose
-  version: fb776c343fcf6e4ca072b0786eb78892bde7110f
+  version: 345306ed885ac7c6d5de6f76789eacd0169e6f85
 - package: github.com/flynn/go-shlex
   version: 3f9db97f856818214da2e1057f8ad84803971cff
 - package: github.com/gorilla/context
@@ -26,15 +26,15 @@ import:
 - package: github.com/Microsoft/go-winio
   version: 9e2895e5f6c3f16473b91d37fae6e89990a4520c
 - package: github.com/opencontainers/runc
-  version: 89ab7f2ccc1e45ddf6485eaa802c35dcf321dfc8
+  version: 2441732d6fcc0fb0a542671a4372e0c7bc99c19e
 - package: github.com/Sirupsen/logrus
-  version: 4b6ea7319e214d98c938f12692336f7ca9348d6b
+  version: v0.9.0
 - package: github.com/xeipuuv/gojsonpointer
   version: e0fe6f68307607d540ed8eac07a342c33fa1b54a
 - package: github.com/xeipuuv/gojsonreference
   version: e02fc20de94c78484cd5ffb007f8af96be030a45
 - package: github.com/xeipuuv/gojsonschema
-  version: 93e72a773fade158921402d6a24c819b48aba29d
+  version: ac452913faa25c08bb78810d3e6f88b8a39f8f25
 - package: golang.org/x/net
   version: 4876518f9e71663000c348837735820161a42df7
 - package: golang.org/x/sys
