@@ -16,7 +16,7 @@ import:
 - package: github.com/docker/go-units
   version: 651fc226e7441360384da338d0fd37f2440ffbe3
 - package: github.com/docker/libcompose
-  version: 345306ed885ac7c6d5de6f76789eacd0169e6f85
+  version: 8ee7bcc364f7b8194581a3c6bd9fa019467c7873
 - package: github.com/flynn/go-shlex
   version: 3f9db97f856818214da2e1057f8ad84803971cff
 - package: github.com/gorilla/context
