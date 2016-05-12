@@ -5,6 +5,7 @@ package compose
 import (
 	"fmt"
 	"regexp"
+	"strings"
 
 	"golang.org/x/net/context"
 
