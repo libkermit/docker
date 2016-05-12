@@ -30,6 +30,10 @@ type Project struct {
 // CreateProject creates a compose project with the given name based on the
 // specified compose files
 func CreateProject(name string, composeFiles ...string) (*Project, error) {
+	// FIXME(vdemeester) temporarly normalize the project name, should not be needed.
+	r := regexp.MustCompile("[^a-z0-9]+")
+	name = r.ReplaceAllString(strings.ToLower(name), "")
+
 	apiClient, err := client.NewEnvClient()
 	if err != nil {
 		return nil, err
