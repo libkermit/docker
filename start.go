@@ -20,7 +20,7 @@ func (p *Project) StartWithConfig(image string, containerConfig ContainerConfig)
 		return types.ContainerJSON{}, err
 	}
 
-	if err := p.Client.ContainerStart(context.Background(), container.ID); err != nil {
+	if err := p.Client.ContainerStart(context.Background(), container.ID, ""); err != nil {
 		return container, err
 	}
 
