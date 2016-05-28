@@ -4,7 +4,7 @@ import:
 - package: github.com/docker/distribution
   version: 467fc068d88aa6610691b7f1a677271a3fac4aac
 - package: github.com/docker/engine-api
-  version: fd7f99d354831e7e809386087e7ec3129fdb1520
+  version: c9b5a47a3a6fea97d0a2242307ad25a3331ce03b
 - package: github.com/docker/go-connections
   version: v0.2.0
 - package: github.com/docker/go-units
