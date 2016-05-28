@@ -1,41 +1,17 @@
 package: github.com/libkermit/docker
 
 import:
-- package: github.com/Azure/go-ansiterm
-  version: 388960b655244e76e24c75f48631564eaefade62
-- package: github.com/cloudfoundry-incubator/candiedyaml
-  version: 5cef21e2e4f0fd147973b558d4db7395176bcd95
 - package: github.com/docker/distribution
   version: 467fc068d88aa6610691b7f1a677271a3fac4aac
-- package: github.com/docker/docker
-  version: 9837ec4da53f15f9120d53a6e1517491ba8b0261
 - package: github.com/docker/engine-api
   version: 3d3d0b6c9d2651aac27f416a6da0224c1875b3eb
 - package: github.com/docker/go-connections
   version: v0.2.0
 - package: github.com/docker/go-units
   version: 651fc226e7441360384da338d0fd37f2440ffbe3
-- package: github.com/docker/libcompose
-  version: 8ee7bcc364f7b8194581a3c6bd9fa019467c7873
-- package: github.com/flynn/go-shlex
-  version: 3f9db97f856818214da2e1057f8ad84803971cff
-- package: github.com/gorilla/context
-  version: 14f550f51af52180c2eefed15e5fd18d63c0a64a
-- package: github.com/gorilla/mux
-  version: e444e69cbd2e2e3e0749a2f3c717cec491552bbf
-- package: github.com/Microsoft/go-winio
-  version: 9e2895e5f6c3f16473b91d37fae6e89990a4520c
+- package: golang.org/x/net
+  version: 4876518f9e71663000c348837735820161a42df7
 - package: github.com/opencontainers/runc
   version: 2441732d6fcc0fb0a542671a4372e0c7bc99c19e
 - package: github.com/Sirupsen/logrus
   version: v0.9.0
-- package: github.com/xeipuuv/gojsonpointer
-  version: e0fe6f68307607d540ed8eac07a342c33fa1b54a
-- package: github.com/xeipuuv/gojsonreference
-  version: e02fc20de94c78484cd5ffb007f8af96be030a45
-- package: github.com/xeipuuv/gojsonschema
-  version: ac452913faa25c08bb78810d3e6f88b8a39f8f25
-- package: golang.org/x/net
-  version: 4876518f9e71663000c348837735820161a42df7
-- package: golang.org/x/sys
-  version: 320cb01ddbbf0473674c2585f9b6e245721de355

@@ -6,10 +6,8 @@ run_integration_test() {
     bundle .integration-daemon-start
     
     TESTFLAGS="$TESTFLAGS"
-    go_test_dir ./integration/docker
-    go_test_dir ./integration/docker/testing
-    go_test_dir ./integration/compose
-    go_test_dir ./integration/compose/testing
+    go_test_dir ./integration
+    go_test_dir ./integration/testing
 
     bundle .integration-daemon-stop
     echo
