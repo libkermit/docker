@@ -22,12 +22,14 @@ func cleanContainers(t *testing.T) *docker.Project {
 		t.Fatal(err)
 	}
 
+	ctx := context.Background()
+
 	filterArgs := filters.NewArgs()
 	if filterArgs, err = filters.ParseFlag(d.KermitLabelFilter, filterArgs); err != nil {
 		t.Fatal(err)
 	}
 
-	containers, err := client.ContainerList(context.Background(), types.ContainerListOptions{
+	containers, err := client.ContainerList(ctx, types.ContainerListOptions{
 		All:    true,
 		Filter: filterArgs,
 	})
@@ -37,7 +39,7 @@ func cleanContainers(t *testing.T) *docker.Project {
 
 	for _, container := range containers {
 		t.Logf("cleaning container %s…", container.ID)
-		if err := client.ContainerRemove(context.Background(), container.ID, types.ContainerRemoveOptions{
+		if err := client.ContainerRemove(ctx, container.ID, types.ContainerRemoveOptions{
 			Force: true,
 		}); err != nil {
 			t.Errorf("Error while removing container %s : %v\n", container.ID, err)
