@@ -21,6 +21,8 @@ func cleanContainers(t *testing.T) *docker.Project {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// FIXME(vdemeester) Fix this
+	client.UpdateClientVersion(docker.CurrentAPIVersion)
 
 	filterArgs := filters.NewArgs()
 	if filterArgs, err = filters.ParseFlag(docker.KermitLabelFilter, filterArgs); err != nil {

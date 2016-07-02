@@ -21,6 +21,8 @@ func cleanContainers(t *testing.T) *docker.Project {
 	if err != nil {
 		t.Fatal(err)
 	}
+	// FIXME(vdemeester) Fix this
+	client.UpdateClientVersion(d.CurrentAPIVersion)
 
 	ctx := context.Background()
 
