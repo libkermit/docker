@@ -11,4 +11,4 @@ install:
 
 script:
   - make validate
-  - make DAEMON_VERSION="all" test
+  - make CODECOV=1 DAEMON_VERSION="all" test
