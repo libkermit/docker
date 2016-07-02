@@ -2,7 +2,8 @@
 
 LIBKERMIT_ENVS := \
 	-e DOCKER_TEST_HOST \
-	-e TESTFLAGS
+	-e TESTFLAGS \
+	-e CODECOV
 
 BIND_DIR := "dist"
 LIBKERMIT_MOUNT := -v "$(CURDIR)/$(BIND_DIR):/go/src/github.com/libkermit/docker/$(BIND_DIR)"

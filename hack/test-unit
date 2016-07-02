@@ -25,6 +25,8 @@ if [ -z "$TESTDIRS" ]; then
     TESTDIRS=$(find_dirs '*_test.go')
 fi
 
+rm -v $DEST/coverage.txt || true
+
 TESTS_FAILED=()
 
 for dir in $TESTDIRS; do
@@ -35,6 +37,11 @@ for dir in $TESTDIRS; do
         echo
         echo "${RED}Tests failed: $dir${TEXTRESET}"
         sleep 1 # give it a second, so observers watching can take note
+    fi
+    if [ -f cover.out ]; then
+        echo "Merge cover.out into $DEST/coverage.txt"
+        cat cover.out >> $DEST/coverage.txt
+        rm cover.out
     fi
 done
 echo
@@ -49,4 +56,8 @@ else
     echo "${GREEN}Test success${TEXTRESET}"
     echo
     true
+fi
+
+if [ -n "${CODECOV}" ]; then
+    bash <(curl -s https://codecov.io/bash)
 fi

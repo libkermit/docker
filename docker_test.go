@@ -1,6 +1,9 @@
 package docker
 
-import "testing"
+import (
+	"github.com/libkermit/docker/test"
+)
 
-func TestEmpty(t *testing.T) {
+type kermitClient struct {
+	test.NopClient
 }
