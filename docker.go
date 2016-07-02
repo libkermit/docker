@@ -32,6 +32,10 @@ var (
 
 	// DefaultStopTimeout is the default timeout for the stop command
 	DefaultStopTimeout = 10
+
+	// CurrentAPIVersion defines the current "lower" docker API version
+	// supported by libkermit.
+	CurrentAPIVersion = "v1.21"
 )
 
 // Project holds docker related project attributes, like docker client, labels
@@ -53,6 +57,7 @@ func NewProjectFromEnv() (*Project, error) {
 	if err != nil {
 		return nil, err
 	}
+	client.UpdateClientVersion(CurrentAPIVersion)
 	return NewProject(client), nil
 }
 
