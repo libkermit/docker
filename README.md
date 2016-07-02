@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/libkermit/docker.svg?branch=master)](https://travis-ci.org/libkermit/docker)
 [![Go Report Card](https://goreportcard.com/badge/github.com/libkermit/docker)](https://goreportcard.com/report/github.com/libkermit/docker)
 [![License](https://img.shields.io/github/license/libkermit/docker.svg)]()
+[![codecov](https://codecov.io/gh/libkermit/docker/branch/master/graph/badge.svg)](https://codecov.io/gh/libkermit/docker)
 
 
 > When green is all there is to be<br/>
