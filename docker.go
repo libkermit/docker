@@ -37,8 +37,14 @@ var (
 // Project holds docker related project attributes, like docker client, labels
 // to put on the containers, and so on.
 type Project struct {
-	Client client.APIClient
+	Client APIClient
 	Labels map[string]string
+}
+
+// APIClient is a lightweight representation of docker client.APIClient
+type APIClient interface {
+	client.ContainerAPIClient
+	client.ImageAPIClient
 }
 
 // NewProjectFromEnv creates a project with a client that is build from environment variables.
@@ -51,7 +57,7 @@ func NewProjectFromEnv() (*Project, error) {
 }
 
 // NewProject creates a project with the given client and the default attributes.
-func NewProject(client client.APIClient) *Project {
+func NewProject(client APIClient) *Project {
 	return &Project{
 		Client: client,
 		Labels: KermitLabels,

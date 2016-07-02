@@ -1,6 +1,8 @@
 package docker
 
 import (
+	"time"
+
 	"golang.org/x/net/context"
 )
 
@@ -11,7 +13,8 @@ func (p *Project) Stop(containerID string) error {
 
 // StopWithTimeout stops the container with the specified timeout.
 func (p *Project) StopWithTimeout(containerID string, timeout int) error {
-	if err := p.Client.ContainerStop(context.Background(), containerID, timeout); err != nil {
+	timeoutDuration := time.Duration(timeout) * time.Second
+	if err := p.Client.ContainerStop(context.Background(), containerID, &timeoutDuration); err != nil {
 		return err
 	}
 
