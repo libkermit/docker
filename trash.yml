@@ -1,17 +1,19 @@
 package: github.com/libkermit/docker
 
 import:
+- package: github.com/docker/docker
+  version: 17aaa0890a7f53cbd9c8806a93de73898ea92813
 - package: github.com/docker/distribution
-  version: 5bbf65499960b184fe8e0f045397375e1a6722b8
-- package: github.com/docker/engine-api
-  version: 62043eb79d581a32ea849645277023c550732e52
+  version: fbb70dc3a14ca65cdac3aaf5e5122b03b42f6fbc
 - package: github.com/docker/go-connections
-  version: 990a1a1a70b0da4c4cb70e117971a4f0babfbf1a
+  version: 1494b6df4050e60923d68cd8cc6a19e7af9f1c01
 - package: github.com/docker/go-units
-  version: f2d77a61e3c169b43402a0a1e84f06daf29b8190
+  version: 8a7beacffa3009a9ac66bad506b18ffdd110cf97
 - package: golang.org/x/net
   version: 4876518f9e71663000c348837735820161a42df7
 - package: github.com/opencontainers/runc
-  version: cc29e3dded8e27ba8f65738f40d251c885030a28
+  version: 02f8fa7863dd3f82909a73e2061897828460d52f
 - package: github.com/Sirupsen/logrus
   version: v0.10.0
+- package: github.com/pkg/errors
+  version: 248dadf4e9068a0b3e79f02ed0a610d935de5302

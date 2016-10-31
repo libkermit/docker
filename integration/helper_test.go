@@ -5,10 +5,10 @@ import (
 
 	"golang.org/x/net/context"
 
-	dockerclient "github.com/docker/engine-api/client"
-	"github.com/docker/engine-api/types"
+	"github.com/docker/docker/api/types"
+	dockerclient "github.com/docker/docker/client"
 	// "github.com/docker/engine-api/types/container"
-	"github.com/docker/engine-api/types/filters"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/libkermit/docker"
 )
 

@@ -7,7 +7,7 @@ package docker
 
 import (
 	"fmt"
-	"github.com/docker/engine-api/client"
+	"github.com/docker/docker/client"
 )
 
 const (
