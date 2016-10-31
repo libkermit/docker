@@ -8,7 +8,7 @@ package testing
 import (
 	"testing"
 
-	"github.com/docker/engine-api/client"
+	"github.com/docker/docker/client"
 	"github.com/libkermit/docker"
 )
 

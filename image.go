@@ -6,8 +6,8 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/docker/engine-api/client"
-	"github.com/docker/engine-api/types"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 // Pull pulls the given reference (image)
@@ -18,7 +18,7 @@ func (p *Project) Pull(ref string) error {
 func (p *Project) ensureImageExists(ref string, force bool) error {
 	if !force {
 		// Check if ref is already there
-		_, _, err := p.Client.ImageInspectWithRaw(context.Background(), ref, false)
+		_, _, err := p.Client.ImageInspectWithRaw(context.Background(), ref)
 		if err != nil && !client.IsErrImageNotFound(err) {
 			return err
 		}

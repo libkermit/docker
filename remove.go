@@ -3,7 +3,7 @@ package docker
 import (
 	"golang.org/x/net/context"
 
-	"github.com/docker/engine-api/types"
+	"github.com/docker/docker/api/types"
 )
 
 // Remove removes the container
