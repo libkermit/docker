@@ -11,8 +11,6 @@ import:
   version: 9e638d38cf6977a37a8ea0078f3ee75a7cdb2dd1
 - package: golang.org/x/net
   version: c427ad74c6d7a814201695e9ffde0c5d400a7674
-- package: github.com/opencontainers/runc
-  version: 992a5be178a62e026f4069f443c6164912adbf09
 - package: github.com/Sirupsen/logrus
   version: v0.11.0
 - package: github.com/pkg/errors
