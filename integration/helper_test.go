@@ -30,8 +30,8 @@ func cleanContainers(t *testing.T) *docker.Project {
 	}
 
 	containers, err := client.ContainerList(context.Background(), types.ContainerListOptions{
-		All:    true,
-		Filter: filterArgs,
+		All:     true,
+		Filters: filterArgs,
 	})
 	if err != nil {
 		t.Fatal(err)
