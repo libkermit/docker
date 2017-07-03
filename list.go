@@ -16,7 +16,7 @@ func (p *Project) List() ([]types.Container, error) {
 		filters.Add("label", fmt.Sprintf("%s=%s", key, value))
 	}
 	containers, err := p.Client.ContainerList(context.Background(), types.ContainerListOptions{
-		Filter: filters,
+		Filters: filters,
 	})
 	if err != nil {
 		return nil, err
