@@ -21,8 +21,9 @@ func cleanContainers(t *testing.T) *docker.Project {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// FIXME(vdemeester) Fix this
-	client.UpdateClientVersion(d.CurrentAPIVersion)
+
+	ping := types.Ping{APIVersion: d.CurrentAPIVersion}
+	client.NegotiateAPIVersionPing(ping)
 
 	ctx := context.Background()
 
