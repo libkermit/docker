@@ -20,11 +20,11 @@ type Project struct {
 
 // NewProjectFromEnv creates a project with a client that is build from environment variables.
 func NewProjectFromEnv(t *testing.T) *Project {
-	client, err := client.NewEnvClient()
+	cli, err := client.NewEnvClient()
 	if err != nil {
 		t.Fatalf("Error while getting a docker client from env: %s", err.Error())
 	}
-	return NewProject(client)
+	return NewProject(cli)
 }
 
 // NewProject creates a project with the given client and the default attributes.
